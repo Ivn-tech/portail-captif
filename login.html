@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internet hotspot - Log in</title>
+    <link rel="stylesheet" href="css/style.css?v=3">
+</head>
+
+<body>
+
+    <!-- two other colors
+
+<body class="lite">
+<body class="dark">
+
+-->
+
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+
+    </script>
+    $(endif)
+    <div class="ie-fixMinHeight">
+        <div class="main">
+           
+            <div class="wrap animated fadeIn">
+                <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                    <input type="hidden" name="dst" value="$(link-orig)" />
+                    <input type="hidden" name="popup" value="true" />
+                    <p class="logo-text">VSOFT ZONE</p>
+                    <div class="contact-banner">
+                        <span class="contact-label">Contact&nbsp;:</span>
+                        <a href="tel:0169042177" class="contact-number">0169042177</a>
+                    </div>
+
+                    <p class="info $(if error)alert$(endif)">
+                        $(if error == "")Please log in to use the internet hotspot service $(if trial == 'yes')<br />Free trial available, <a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">click here</a>.$(endif)
+                        $(endif)
+
+                        $(if error)$(error)$(endif)
+                    </p>
+                    <label>
+                        <img class="ico" src="img/user.svg" alt="#" />
+                        <input name="username" type="text" value="$(username)" placeholder="Username" />
+                    </label>
+
+                    <label>
+                        <img class="ico" src="img/password.svg" alt="#" />
+                        <input name="password" type="password" placeholder="Password" />
+                    </label>
+
+                    <input type="submit" value="Connecter" />
+
+                </form>
+
+                <section class="rates">
+                    <h2>Tarifs des tickets</h2>
+                    <table class="rates-table">
+                        <thead>
+                            <tr>
+                                <th>Prix</th>
+                                <th>Validité</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>100f</td><td>4 heures</td></tr>
+                            <tr><td>100f</td><td>5 heures</td></tr>
+                            <tr><td>200f</td><td>24 heures</td></tr>
+                            <tr><td>500f</td><td>3 jours</td></tr>
+                            <tr><td>1000f</td><td>7 jours</td></tr>
+                            <tr><td>3500f</td><td>1 mois</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+<footer>
+  <p class="info bt">DIRECTED BY IVAN 0194626237</p>
+</footer>
+              
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
